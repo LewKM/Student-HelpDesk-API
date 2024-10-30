@@ -9,6 +9,6 @@ default: &default
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: 
-  username: 
+  database: student_helpdesk_db
+  username: stduent_helpdesk_db_owner
   password: <%= ENV['DATABASE_PASSWORD'] %>
