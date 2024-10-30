@@ -28,7 +28,7 @@ gem 'acts-as-taggable-on', '~> 9.0'
 
 # gem 'bookmark_system', '~> 0.2.0'
 
-# gem "faker", "~> 2.23"
+gem "faker"
 
 gem 'will_paginate', '~> 3.3'
 group :development, :test do
