@@ -7,7 +7,7 @@ puts 'Seeding users...'
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
-    password: '123456',
+    password: 'pass123word456',
     username: Faker::Internet.username
   )
 end
@@ -26,7 +26,7 @@ end
 puts 'Seeding solutions...'
 
 Question.all.each do |question|
-  5.times do
+  10.times do
     Solution.create(
       question_id: question.id,
       user_id: rand(1..20),
