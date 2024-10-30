@@ -1,29 +1,48 @@
-puts 'seeding users'
+require 'faker'
 
-user1 = User.create(first_name: 'John', last_name: 'Doe', email: 'john@example.com', password: '123456', username: 'Jonnie')
-user1 = User.create(first_name: 'Alice', last_name: 'Auko', email: 'alice@example.com', password: '123456', username: 'Alice')
-user1 = User.create(first_name: 'Ebenezar', last_name: 'Bukosia', email: 'ebenezar@example.com', password: '123456', username: 'ebbe')
+puts 'Seeding users...'
 
-puts 'seeding questions'
-quiz1 = Question.create(title: "How to enable two step auth", description: "I am logged out of canva and i'm requred to enable two step authentification, any help ", user_id: 2, votes:0)
-quiz2 = Question.create(title: "How to deploy rails api in heroku", description: "I need a full guide on how i can deploy my api on heroku", user_id: 1, votes:12)
-quiz3 = Question.create(title: "Can't login on canva", description: "When i try to log into canva i get responce account does not exist any help?", user_id: 2, votes:12)
-quiz4 = Question.create(title: "Need help on renaming model column on rails ", description: "How can i rename a column on rails ", user_id: 2, votes:54)
-quiz5 = Question.create(title: "Cant access linked in learning", description: "Can seem to be able to log into linked in learning", user_id: 2, votes:33)
+20.times do |i|
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: '123456',
+    username: Faker::Internet.username
+  )
+end
 
-puts 'seeding bookmarks...'
-er =Bookmark.create(user_id:2, question_id:2)
-essr =Bookmark.create(user_id:1, question_id:4)
-esr =Bookmark.create(user_id:1, question_id:1)
-essr =Bookmark.create(user_id:2, question_id:3)
-essr =Bookmark.create(user_id:2, question_id:5)
+puts 'Seeding questions...'
 
+50.times do |i|
+  Question.create(
+    title: Faker::Lorem.sentence(word_count: 5),
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    user_id: rand(1..20),
+    votes: rand(0..100)
+  )
+end
 
-soln1 = Solution.create(question_id: 1, user_id:2, votes: 122, description: 'Here is what you can try...')
-soln2 = Solution.create(question_id: 1, user_id:1, votes: 23, description: 'Simple try this..')
-soln3 = Solution.create(question_id: 2, user_id:2, votes: 25, description: 'What hav you tried..')
-soln4 = Solution.create(question_id: 2, user_id:1, votes: 52, description: 'Helo did you manage...')
-soln5 = Solution.create(question_id: 3, user_id:2, votes: 2, description: 'Try this...')
+puts 'Seeding solutions...'
 
-puts "Seeding done!"
+Question.all.each do |question|
+  5.times do
+    Solution.create(
+      question_id: question.id,
+      user_id: rand(1..20),
+      votes: rand(0..100),
+      description: Faker::Lorem.paragraph(sentence_count: 3)
+    )
+  end
+end
 
+puts 'Seeding bookmarks...'
+
+50.times do
+  Bookmark.create(
+    user_id: rand(1..20),
+    question_id: rand(1..50)
+  )
+end
+
+puts 'Seeding done!'
